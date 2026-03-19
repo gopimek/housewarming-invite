@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gopi's Housewarming</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box}
+
+body{
+     margin:0;
+      font-family:Poppins, sans-serif;
+       height:100vh;
+        overflow:hidden;
+         display:flex;
+          align-items:center;
+           justify-content:center;
+            background:radial-gradient(circle at top,#fff1f4,#ffe9dc,#eef6ff);
+}
+
+/* animated gradient glow */
+body::before{
+     content:"";
+      position:fixed;
+       width:200%;
+        height:200%;
+         background:conic-gradient(from 180deg,#ffb6b9,#ffd6a5,#cde7ff,#ffb6b9);
+          animation:rotateBg 25s linear infinite;
+           opacity:.25;
+}
+
+@keyframes rotateBg{
+     from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+}
+
+/* floating petals */
+.petal{
+     position:absolute;
+      font-size:22px;
+       opacity:.9;
+        animation:petalFall linear infinite;
+}
+
+@keyframes petalFall{
+     0%{transform:translateY(-10vh) rotate(0deg);opacity:0}
+      10%{opacity:1}
+       100%{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+/* fireworks */
+.firework{
+     position:absolute;
+      width:6px;
+       height:6px;
+        border-radius:50%;
+         background:gold;
+          box-shadow:0 0 10px 4px rgba(255,215,0,.8);
+           animation:explode 2.5s ease-out infinite;
+}
+
+@keyframes explode{
+     0%{transform:scale(0);opacity:1}
+      60%{transform:scale(6);opacity:.8}
+       100%{transform:scale(10);opacity:0}
+}
+
+/* invitation card */
+.card{
+     position:relative;
+      z-index:10;
+       width:520px;
+        padding:45px;
+         border-radius:30px;
+          text-align:center;
+           background:rgba(255,255,255,0.85);
+            backdrop-filter:blur(15px);
+             box-shadow:0 40px 90px rgba(0,0,0,.25);
+              animation:cardReveal 1.2s ease;
+}
+
+@keyframes cardReveal{
+     from{opacity:0;transform:translateY(60px) scale(.9)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+h1{
+     font-size:36px;
+      margin:0;
+       background:linear-gradient(45deg,#ff7a7a,#ffb36b);
+        -webkit-background-clip:text;
+         -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+     margin-top:6px;
+      color:#666;
+}
+
+.divider{
+     width:60px;
+      height:3px;
+       background:linear-gradient(45deg,#ff7a7a,#ffb36b);
+        margin:18px auto;
+         border-radius:3px;
+}
+
+.info{
+     font-size:18px;
+      margin:10px 0;
+}
+
+.host{
+     font-weight:600;
+      font-size:19px;
+}
+
+/* countdown */
+.countdown{
+     margin-top:20px;
+      font-weight:600;
+       color:#444;
+}
+
+.button{
+     display:inline-block;
+      margin-top:28px;
+       padding:15px 34px;
+        border-radius:40px;
+         text-decoration:none;
+          color:white;
+           font-weight:600;
+            background:linear-gradient(45deg,#ff7a7a,#ffb36b);
+             box-shadow:0 10px 25px rgba(0,0,0,.25);
+              transition:.3s;
+}
+
+.button:hover{
+     transform:translateY(-4px) scale(1.07);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+.footer{
+     margin-top:25px;
+      color:#777;
+       font-size:14px;
+}
+
+</style></head><body><!-- flower petals --><div class="petal" style="left:5%;animation-duration:12s">🌸</div>
+<div class="petal" style="left:15%;animation-duration:15s">🌺</div>
+<div class="petal" style="left:28%;animation-duration:13s">🌼</div>
+<div class="petal" style="left:40%;animation-duration:17s">🌸</div>
+<div class="petal" style="left:55%;animation-duration:14s">🌺</div>
+<div class="petal" style="left:68%;animation-duration:16s">🌼</div>
+<div class="petal" style="left:82%;animation-duration:12s">🌸</div>
+<div class="petal" style="left:92%;animation-duration:18s">🌺</div><!-- fireworks --><div class="firework" style="top:15%;left:20%"></div>
+<div class="firework" style="top:30%;left:75%;animation-delay:1s"></div>
+<div class="firework" style="top:60%;left:15%;animation-delay:2s"></div>
+<div class="firework" style="top:70%;left:80%;animation-delay:1.5s"></div><div class="card"><h1>🏠 Housewarming</h1>
+<div class="subtitle">Gruha Pravesam Invitation</div>
+<div class="divider"></div><div class="host">Hosted by Gopi Bodduluri</div><div class="info">📅 March 25, 2026</div>
+<div class="info">⏰ 9:50 AM</div><div class="info">
+📍 4-30, Penumuli Village<br>
+Near VRO Office<br>
+Duggirala Mandal, Guntur District
+</div><div class="countdown" id="countdown"></div><a class="button" href="https://maps.app.goo.gl/euAWtNrFqHtFY5Y86" target="_blank">Open Location 📍</a>
+
+<div class="footer">
+Your presence and blessings will make this occasion more special for our family ❤️
+</div></div><script>
+const eventDate = new Date("March 25, 2026 09:50:00").getTime();
+
+setInterval(()=>{
+     const now = new Date().getTime();
+      const distance = eventDate - now;
+
+       const days = Math.floor(distance/(1000*60*60*24));
+        const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+         const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+          document.getElementById("countdown").innerHTML =
+           "⏳ " + days + " days " + hours + " hrs " + minutes + " min remaining";
+},1000);
+</script></body>
+</html>
+})
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
